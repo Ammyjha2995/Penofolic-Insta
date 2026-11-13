@@ -1,1 +1,41 @@
+name: 2. Publish approved draft
 
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency: feedbot
+
+jobs:
+  publish:
+    if: github.event.label.name == 'approved' && contains(github.event.issue.labels.*.name, 'insta-draft') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -q -r requirements.txt
+
+      - name: Publish to Instagram
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python -m feedbot publish --issue "${{ github.event.issue.number }}"
+
+      - name: Save state
+        run: |
+          git config user.name "penofolic-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add state && git commit -m "Published issue #${{ github.event.issue.number }}" && git pull --rebase -q && git push -q || true
+
+      - name: Report failure on the issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "Publishing failed. Open the Actions tab for the error, fix it, then remove and re-add the \`approved\` label."
