@@ -3,17 +3,27 @@ name: 2. Publish approved draft
 on:
   issues:
     types: [labeled]
+  workflow_dispatch:          # manual button: Actions -> this workflow -> Run workflow -> issue number
+    inputs:
+      issue:
+        description: "Issue number of the draft to publish"
+        required: true
 
 permissions:
   contents: write
   issues: write
 
-concurrency: feedbot
-
 jobs:
   publish:
-    if: github.event.label.name == 'approved' && contains(github.event.issue.labels.*.name, 'insta-draft') && github.event.issue.state == 'open'
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.label.name == 'approved' &&
+       contains(github.event.issue.labels.*.name, 'insta-draft') &&
+       github.event.issue.state == 'open')
     runs-on: ubuntu-latest
+    concurrency: feedbot      # job-level, so skipped runs never cancel a real one
+    env:
+      ISSUE: ${{ github.event.inputs.issue || github.event.issue.number }}
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
@@ -26,16 +36,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
-        run: python -m feedbot publish --issue "${{ github.event.issue.number }}"
+        run: python -m feedbot publish --issue "$ISSUE"
 
       - name: Save state
         run: |
           git config user.name "penofolic-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add state && git commit -m "Published issue #${{ github.event.issue.number }}" && git pull --rebase -q && git push -q || true
+          git add state && git commit -m "Published issue #$ISSUE" && git pull --rebase -q && git push -q || true
 
       - name: Report failure on the issue
         if: failure()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "Publishing failed. Open the Actions tab for the error, fix it, then remove and re-add the \`approved\` label."
+        run: gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body "Publishing failed. Open the Actions tab for the error. To retry, use Actions -> '2. Publish approved draft' -> Run workflow -> issue number $ISSUE."
