@@ -1,0 +1,91 @@
+[
+ {
+  "title": "Net direct tax collections rise 11.8% to ₹14.42 trillion as of November 10",
+  "hook": "Direct tax collections climb 11.8% to ₹14.42 trillion",
+  "points": [
+   "Net direct tax collections reached ₹14.42 trillion as of November 10.",
+   "That is an 11.8% rise over the same point last year."
+  ],
+  "why": "Stronger direct tax receipts give the Centre more room to meet its fiscal deficit target without cutting capital spending.",
+  "category": "Fiscal",
+  "sources": [
+   "Business Standard"
+  ],
+  "link": "https://www.business-standard.com/",
+  "region": "india"
+ },
+ {
+  "title": "RBI to conduct 3-day Variable Rate Reverse Repo (VRRR) auction under LAF on November 13, 2026",
+  "hook": "RBI moves to absorb surplus liquidity with a 3-day VRRR auction",
+  "points": [
+   "The RBI will hold a 3-day variable rate reverse repo auction on November 13.",
+   "The operation sits under the Liquidity Adjustment Facility (LAF)."
+  ],
+  "why": "Draining excess cash keeps overnight rates close to the policy corridor and signals how the RBI reads system liquidity.",
+  "category": "Monetary policy",
+  "sources": [
+   "RBI"
+  ],
+  "link": "https://www.rbi.org.in/",
+  "region": "india"
+ },
+ {
+  "title": "UPI volume jumps 32% on Diwali driven by last-minute festival buying",
+  "hook": "UPI volumes jump 32% on Diwali as festive buying peaks",
+  "points": [
+   "UPI transaction volumes rose 32% on Diwali.",
+   "Last-minute festival shopping drove the spike."
+  ],
+  "why": "Festive digital payments are a real-time read on household consumption ahead of official data.",
+  "category": "Banking",
+  "sources": [
+   "Business Standard"
+  ],
+  "link": "https://www.business-standard.com/",
+  "region": "india"
+ },
+ {
+  "title": "Cabinet clears ₹2,390 crore Noida Metro Aqua Line expansion over 8.5 km",
+  "hook": "Cabinet approves ₹2,390 crore, 8.5 km Noida Metro extension",
+  "points": [
+   "The Union Cabinet cleared the Aqua Line expansion at ₹2,390 crore.",
+   "The extension adds 8.5 km to the Noida Metro network."
+  ],
+  "why": "Urban transit capex supports construction demand now and productivity gains in the NCR over time.",
+  "category": "Fiscal",
+  "sources": [
+   "Business Standard"
+  ],
+  "link": "https://www.business-standard.com/",
+  "region": "india"
+ },
+ {
+  "title": "Piero Cipollone: Cash and the digital euro: two sides of the same coin",
+  "hook": "ECB's Cipollone pitches the digital euro as a partner to cash, not a replacement",
+  "points": [
+   "ECB Executive Board member Piero Cipollone spoke on cash and the digital euro.",
+   "He framed the two as complementary forms of central bank money."
+  ],
+  "why": "A digital euro could shape how other central banks, including the RBI with its e-rupee, design retail CBDCs.",
+  "category": "Monetary policy",
+  "sources": [
+   "ECB"
+  ],
+  "link": "https://www.ecb.europa.eu/",
+  "region": "world"
+ },
+ {
+  "title": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
+  "hook": "US Fed publishes revised 2027 FOMC meeting calendar",
+  "points": [
+   "The Federal Reserve released a revised tentative schedule of 2027 FOMC meetings."
+  ],
+  "why": "Fed decision dates move global rates and capital flows, so Indian markets and the RBI track them closely.",
+  "category": "Monetary policy",
+  "sources": [
+   "US Federal Reserve"
+  ],
+  "link": "https://www.federalreserve.gov/",
+  "region": "world"
+ }
+]

@@ -1,0 +1,54 @@
+# Penofolic Instagram feed bot: settings you can edit on GitHub (pencil icon) at any time.
+
+brand:
+  name: Penofolic
+  handle: "@penofolic"            # your Instagram handle, shown on the cards
+  website: penofolic.pages.dev    # shown on the last slide and in the caption
+  timezone: Asia/Kolkata
+
+post:
+  india_stories: 4           # India stories in the daily carousel
+  world_stories: 2           # global stories (total of both: max 8)
+  lookback_hours: 30         # only consider news published in this window
+  min_score: 2.0             # stories scoring below this are ignored
+  max_per_category: 2        # keeps the carousel varied
+  hashtags_base: ["#IndianEconomy", "#Economics", "#EconomyToday", "#Penofolic", "#PolicyMatters"]
+
+ai:
+  enabled: true              # uses the ANTHROPIC_API_KEY secret if present; otherwise plain headlines
+  model: claude-haiku-5-5
+  max_tokens: 2500
+
+# News sources. A feed that fails on a given day is skipped, not fatal.
+# weight: added to every story from that source (official sources rank higher).
+# region: india or world (decides which section of the carousel a story goes in).
+feeds:
+  - {name: RBI,               url: "https://www.rbi.org.in/pressreleases_rss.xml",                       weight: 1.0, region: india}
+  - {name: Business Standard, url: "https://www.business-standard.com/rss/economy-102.rss",              weight: 0.5, region: india}
+  - {name: Business Standard, url: "https://www.business-standard.com/rss/finance-103.rss",              weight: 0.0, region: india}
+  - {name: Mint,              url: "https://www.livemint.com/rss/economy",                               weight: 0.5, region: india}
+  - {name: Economic Times,    url: "https://economictimes.indiatimes.com/news/economy/rssfeeds/1373380680.cms", weight: 0.5, region: india}
+  - {name: BusinessLine,      url: "https://www.thehindubusinessline.com/economy/feeder/default.rss",    weight: 0.3, region: india}
+  - {name: Financial Express, url: "https://www.financialexpress.com/about/economy/feed/",                weight: 0.3, region: india}
+  # World
+  - {name: US Federal Reserve, url: "https://www.federalreserve.gov/feeds/press_all.xml",    weight: 1.0, region: world}
+  - {name: ECB,               url: "https://www.ecb.europa.eu/rss/press.html",                weight: 0.6, region: world}
+  - {name: BBC Business,      url: "https://feeds.bbci.co.uk/news/business/rss.xml",          weight: 0.4, region: world}
+  - {name: The Guardian,      url: "https://www.theguardian.com/business/economics/rss",      weight: 0.4, region: world}
+  - {name: CNBC,              url: "https://www.cnbc.com/id/20910258/device/rss/rss.html",    weight: 0.4, region: world}
+
+# Topic categories: keyword -> weight. A story's category is the one with the highest score.
+categories:
+  Monetary policy: {RBI: 2, repo: 3, "monetary policy": 3, MPC: 3, liquidity: 1.5, "rate cut": 3, "rate hike": 3, VRRR: 1, "reverse repo": 1.5, CRR: 2, "Federal Reserve": 3, Fed: 2, FOMC: 3, ECB: 3, "Bank of England": 3, "Bank of Japan": 3, "interest rate": 2, "central bank": 2}
+  Inflation:       {inflation: 3, CPI: 3, WPI: 3, "retail inflation": 3, "food prices": 2, "core inflation": 3}
+  Growth:          {GDP: 3, growth: 1.5, IIP: 3, "industrial output": 2.5, PMI: 2.5, GVA: 2.5, recession: 2, slowdown: 2, "core sector": 2.5, consumption: 1.5, IMF: 2.5, "World Bank": 2.5, "global economy": 3, "global growth": 3, "China's economy": 3, "jobs report": 3, payrolls: 2.5}
+  Fiscal:          {"fiscal deficit": 3, budget: 2, GST: 2.5, "tax collection": 2.5, "direct tax": 2, borrowing: 1.5, "finance ministry": 1.5, capex: 2, subsidy: 1.5, disinvestment: 2}
+  Trade:           {exports: 2.5, imports: 2, "trade deficit": 3, tariff: 2.5, FTA: 3, "trade deal": 3, "current account": 3, WTO: 2, "trade pact": 3, "trade war": 3, sanctions: 2}
+  Markets:         {rupee: 2.5, forex: 2.5, "bond yield": 2.5, FPI: 2, FDI: 2.5, "foreign exchange reserves": 3, crude: 1.5, gold: 1, OPEC: 2.5, "oil prices": 2.5, "Treasury yields": 2.5, dollar: 1.5}
+  Banking:         {bank: 1, NPA: 2.5, credit: 1.5, deposit: 1.5, UPI: 1.5, NBFC: 2, lending: 1.5, "loan growth": 2.5}
+  Jobs:            {unemployment: 3, jobs: 2, employment: 2, PLFS: 3, wages: 2, EPFO: 2}
+  Infrastructure:  {infrastructure: 2.5, metro: 2, highway: 2, railway: 2, port: 1.5, "Cabinet approves": 2, "Cabinet clears": 2, PLI: 2.5, manufacturing: 1.5}
+  Investment:      {investment: 2, investor: 1.5, MoU: 2, pact: 1.5, "private capex": 3, startup: 1, "venture capital": 2}
+
+# Stories containing any of these are dropped (market tips, live blogs, etc.)
+exclude: ["Fed up", "enforcement action", "stocks to buy", "share price", "live updates", "live:", "horoscope", "IPO GMP", "Sensex today", "Nifty today", "recipe", "web story", "photos:"]
