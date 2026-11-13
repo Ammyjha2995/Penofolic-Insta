@@ -31,14 +31,38 @@ def tz(c):
         return timezone(timedelta(hours=5, minutes=30))
 
 
+ITEMS = ROOT / "state" / "items"
+
+
 def load_state():
-    return json.loads(STATE.read_text()) if STATE.exists() else {"items": []}
+    """All draft records: legacy state/posted.json + one file per draft in state/items/ (no merge conflicts)."""
+    items = json.loads(STATE.read_text()).get("items", []) if STATE.exists() else []
+    if ITEMS.exists():
+        for f in sorted(ITEMS.glob("*.json")):
+            try:
+                items.append(json.loads(f.read_text()))
+            except ValueError:
+                pass
+    return {"items": items}
 
 
-def save_state(st):
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=21)).isoformat()
-    st["items"] = [x for x in st["items"] if x.get("at", "") >= cutoff]
-    STATE.write_text(json.dumps(st, indent=1, ensure_ascii=False))
+def _item_path(folder):
+    return ITEMS / (Path(folder).name + ".json")
+
+
+def save_item(item):
+    ITEMS.mkdir(parents=True, exist_ok=True)
+    _item_path(item["folder"]).write_text(json.dumps(item, indent=1, ensure_ascii=False))
+
+
+def prune_items(days=21):
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    for f in ITEMS.glob("*.json") if ITEMS.exists() else []:
+        try:
+            if json.loads(f.read_text()).get("at", "") < cutoff:
+                f.unlink()
+        except ValueError:
+            f.unlink()
 
 
 def output(**kv):
@@ -90,10 +114,9 @@ def _pick(c, now, quota):
 
 
 def _record(folder, kind, picked):
-    st = load_state()
-    st["items"].append({"at": datetime.now(timezone.utc).isoformat(), "folder": str(folder.relative_to(ROOT)), "type": kind,
-                        "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]]})
-    save_state(st)
+    prune_items()
+    save_item({"at": datetime.now(timezone.utc).isoformat(), "folder": str(folder.relative_to(ROOT)), "type": kind,
+               "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]]})
 
 
 def _prune(days=10):
@@ -245,11 +268,10 @@ def cmd_publish(a):
         media_id, link = instagram.publish(urls, cap, token, uid)
     log.info("published %s %s", media_id, link)
 
-    st = load_state()
-    for x in st["items"]:
-        if x.get("folder") == folder:
-            x.update(status="published", media_id=media_id, permalink=link)
-    save_state(st)
+    ip = _item_path(folder)
+    item = json.loads(ip.read_text()) if ip.exists() else {"at": datetime.now(timezone.utc).isoformat(), "folder": folder, "sigs": []}
+    item.update(status="published", media_id=media_id, permalink=link)
+    save_item(item)
     if issue:
         from . import gh
         gh.comment(a.issue, f"Published to Instagram: {link or media_id}")
