@@ -11,7 +11,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import requests, yaml
 
-from . import news, writer, cards
+from . import news, writer, cards2
 
 ROOT = Path(__file__).resolve().parent.parent
 STATE = ROOT / "state" / "posted.json"
@@ -54,35 +54,102 @@ def nice_date(d):
     return f"{d.day} {d:%B %Y}"
 
 
-def make_post(stories, c, folder, date_str):
-    title = writer.write(stories, c)
-    cap = writer.caption(stories, title, c, date_str)
-    paths = cards.render_all(stories, title, date_str, c, folder)
-    meta = {"date": date_str, "cover": title, "caption": cap, "slides": [p.name for p in paths],
-            "stories": [{k: s.get(k) for k in ("title", "hook", "points", "why", "category", "sources", "links", "score", "link", "summary")} for s in stories]}
-    (Path(folder) / "post.json").write_text(json.dumps(meta, indent=1, ensure_ascii=False))
-    return meta
+FIGNUM = re.compile(r"^(\D*?)(-?[\d,]+(?:\.(\d+))?)(.*)$")
+
+
+def reel_content(r, c):
+    """Map writer.reel output to the Reel scene fields."""
+    f = r["fig"]
+    m = FIGNUM.match(f.get("figure") or "")
+    value = fmt = None
+    if m:
+        value = float(m.group(2).replace(",", ""))
+        dec = len(m.group(3) or "")
+        fmt = m.group(1).replace("{", "{{") + "{:,." + str(dec) + "f}" + m.group(4).replace("{", "{{")
+    a = c.get("about", {})
+    out = {"kind": f["kind"], "value": value, "fmt": fmt, "change": f.get("change"), "up": f.get("up") is not False,
+           "question": r["question"], "tag": r["tag"], "headline": r["headline"], "points": r["points"],
+           "chart_title": r["chart_title"], "why": r["why"], "source": r["source"],
+           "founder": a.get("name", "Amit Kumar"), "founder_title": a.get("title", "FOUNDER, PENOFOLIC"),
+           "founder_line": " · ".join(a.get("credentials", [])), "handle": c["brand"]["handle"],
+           "voice_name": c.get("reel", {}).get("voice", "en-IN-NeerjaNeural")}
+    if f["kind"] == "bars":
+        out.update(bars=f["bars"], delta=f.get("delta"),
+                   chart_note="Earlier figure implied from the reported growth rate." if f.get("implied") else "")
+    elif f["kind"] == "ring":
+        out.update(pct=f["pct"], pct_text=f["pct_text"], pct_label=r["tag"].split("·")[-1].strip())
+    return out
+
+
+def _pick(c, now, quota):
+    st = load_state()
+    sigs = {s for x in st["items"] for s in x.get("sigs", [])}
+    stories = news.fetch(c, tz(c))
+    trends = news.fetch_trends(c)
+    return news.score_and_pick(stories, c, sigs, now.astimezone(timezone.utc), trends, quota)
+
+
+def _record(folder, kind, picked):
+    st = load_state()
+    st["items"].append({"at": datetime.now(timezone.utc).isoformat(), "folder": str(folder.relative_to(ROOT)), "type": kind,
+                        "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]]})
+    save_state(st)
+
+
+def _prune(days=10):
+    """Delete queue folders older than `days` (Instagram has already fetched them)."""
+    import shutil
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%d")
+    for f in (ROOT / "queue").glob("20*"):
+        if f.is_dir() and f.name[:10] < cutoff:
+            shutil.rmtree(f, ignore_errors=True)
+
+
+def _folder(now, kind):
+    f = ROOT / "queue" / f"{now:%Y-%m-%d}-{kind}"
+    return f if not f.exists() else ROOT / "queue" / f"{now:%Y-%m-%d-%H%M}-{kind}"
 
 
 # ---------------------------------------------------------------- commands
 def cmd_draft(a):
     c = cfg()
     now = datetime.now(tz(c))
-    st = load_state()
-    sigs = {s for x in st["items"] for s in x.get("sigs", [])}
-    picked = news.score_and_pick(news.fetch(c, tz(c)), c, sigs, now.astimezone(timezone.utc))
+    date_str = nice_date(now)
+    _prune()
+    if a.kind == "reel":
+        cands = _pick(c, now, {"india": 2, "world": 1})
+        if not cands:
+            log.warning("no qualifying stories"); return output(folder="")
+        from . import figures
+        lead = max(cands, key=lambda s: s["score"] + (2 if figures.pick(s)["kind"] in ("bars", "ring") else 0))
+        log.info("reel story %.1f [%s] %s", lead["score"], lead["category"], lead["title"])
+        folder = _folder(now, "reel"); folder.mkdir(parents=True)
+        r = writer.reel(lead, c)
+        from . import reel
+        rc = reel_content(r, c)
+        voice = r["vo"] if c.get("reel", {}).get("voice", "none") != "none" else None
+        music = c.get("reel", {}).get("music") or None
+        mp4, cover, scenes = reel.render(rc, folder / "reel.mp4", music=(ROOT / music) if music else None, voice=voice, workdir=folder)
+        meta = {"type": "reel", "date": date_str, "caption": writer.caption_reel(r, date_str), "video": mp4.name,
+                "cover": cover.name, "slides": [cover.name], "scenes": scenes,
+                "stories": [{"hook": r["headline"], "sources": lead["sources"], "link": lead["link"], "title": lead["title"]}]}
+        (folder / "post.json").write_text(json.dumps(meta, indent=1, ensure_ascii=False))
+        _record(folder, "reel", [lead])
+        return output(folder=str(folder.relative_to(ROOT)))
+
+    picked = _pick(c, now, None)
     if not picked:
-        log.warning("no qualifying stories today")
-        return output(folder="")
+        log.warning("no qualifying stories today"); return output(folder="")
     for s in picked:
-        log.info("pick %.1f [%s] %s (%s)", s["score"], s["category"], s["title"], ", ".join(s["sources"]))
-    folder = ROOT / "queue" / now.strftime("%Y-%m-%d")
-    if folder.exists():
-        folder = ROOT / "queue" / now.strftime("%Y-%m-%d-%H%M")
-    make_post(picked, c, folder, nice_date(now))
-    st["items"].append({"at": datetime.now(timezone.utc).isoformat(), "folder": str(folder.relative_to(ROOT)),
-                        "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]]})
-    save_state(st)
+        log.info("pick %.1f [%s]%s %s (%s)", s["score"], s["category"], " TRENDING" if s.get("trending") else "", s["title"], ", ".join(s["sources"]))
+    folder = _folder(now, "carousel")
+    meta = writer.carousel(picked, c)
+    paths = cards2.render_carousel(picked, meta, date_str, c, folder)
+    post = {"type": "carousel", "date": date_str, "caption": writer.caption_carousel(picked, meta, date_str),
+            "slides": [p.name for p in paths],
+            "stories": [{k: s.get(k) for k in ("title", "hook", "points", "why", "category", "region", "sources", "link", "score", "trending")} for s in picked]}
+    (folder / "post.json").write_text(json.dumps(post, indent=1, ensure_ascii=False))
+    _record(folder, "carousel", picked)
     output(folder=str(folder.relative_to(ROOT)))
 
 
@@ -93,14 +160,14 @@ def _sha_for(folder):
     return out
 
 
-def _urls(folder, meta, cdn=True):
+def _urls(folder, names, cdn=True):
     repo, sha = os.environ["GITHUB_REPOSITORY"], _sha_for(folder)
     base = os.environ.get("IMAGE_BASE_URL", "").rstrip("/")
     if base:
-        return [f"{base}/{folder}/{n}" for n in meta["slides"]]
+        return [f"{base}/{folder}/{n}" for n in names]
     if cdn:
-        return [f"https://cdn.jsdelivr.net/gh/{repo}@{sha}/{folder}/{n}" for n in meta["slides"]]
-    return [f"https://raw.githubusercontent.com/{repo}/{sha}/{folder}/{n}" for n in meta["slides"]]
+        return [f"https://cdn.jsdelivr.net/gh/{repo}@{sha}/{folder}/{n}" for n in names]
+    return [f"https://raw.githubusercontent.com/{repo}/{sha}/{folder}/{n}" for n in names]
 
 
 def cmd_open_issue(a):
@@ -108,8 +175,11 @@ def cmd_open_issue(a):
     folder = a.folder
     meta = json.loads((ROOT / folder / "post.json").read_text())
     gh.ensure_labels()
-    imgs = _urls(folder, meta, cdn=False)
-    srcs = "\n".join(f"- **{s['hook']}** ({', '.join(s['sources'])}) — [source]({s['link']})" for s in meta["stories"])
+    imgs = _urls(folder, meta["slides"], cdn=False)
+    srcs = "\n".join(f"- **{s['hook']}** ({', '.join(s['sources'])}){' 🔥 trending' if s.get('trending') else ''} — [source]({s['link']})" for s in meta["stories"])
+    is_reel = meta.get("type") == "reel"
+    media = (f"**▶ [Watch the Reel]({_urls(folder, [meta['video']], cdn=False)[0]})**\n\n<img src=\"{imgs[0]}\" width=\"260\">"
+             if is_reel else " ".join(f'<img src="{u}" width="220">' for u in imgs))
     body = f"""<!-- feedbot:folder={folder} -->
 **To publish:** add the label `approved`. **To skip:** close this issue.
 You can edit the caption below first (keep it inside the fence).
@@ -122,10 +192,10 @@ You can edit the caption below first (keep it inside the fence).
 ### Stories
 {srcs}
 
-### Slides
-{' '.join(f'<img src="{u}" width="220">' for u in imgs)}
+### {'Reel' if is_reel else 'Slides'}
+{media}
 """
-    n = gh.create_issue(f"Instagram draft: Economy Today, {meta['date']}", body)
+    n = gh.create_issue(f"Instagram draft: {'8 PM Reel' if is_reel else '8 AM Carousel'}, {meta['date']}", body)
     output(issue=n)
 
 
@@ -133,7 +203,7 @@ def _reachable(url):
     for _ in range(6):
         try:
             r = requests.get(url, timeout=30, stream=True)
-            if r.status_code == 200 and r.headers.get("content-type", "").startswith("image/"):
+            if r.status_code == 200 and r.headers.get("content-type", "").startswith(("image/", "video/", "application/octet-stream")):
                 return True
         except requests.RequestException:
             pass
@@ -158,15 +228,21 @@ def cmd_publish(a):
     meta = json.loads((ROOT / folder / "post.json").read_text())
     cap = cm.group(1).strip() if cm else meta["caption"]
 
-    urls = _urls(folder, meta, cdn=True)
+    is_reel = meta.get("type") == "reel"
+    names = [meta["video"], meta["cover"]] if is_reel else meta["slides"]
+    urls = _urls(folder, names, cdn=True)
     if not _reachable(urls[0]):
         log.warning("CDN not reachable yet, falling back to raw.githubusercontent.com")
-        urls = _urls(folder, meta, cdn=False)
+        urls = _urls(folder, names, cdn=False)
     if a.dry_run:
-        print(json.dumps({"folder": folder, "urls": urls, "caption": cap}, indent=1, ensure_ascii=False))
+        print(json.dumps({"folder": folder, "type": meta.get("type"), "urls": urls, "caption": cap}, indent=1, ensure_ascii=False))
         return
     token = os.environ["IG_ACCESS_TOKEN"].strip()
-    media_id, link = instagram.publish(urls, cap, token, os.environ.get("IG_USER_ID") or None)
+    uid = os.environ.get("IG_USER_ID") or None
+    if is_reel:
+        media_id, link = instagram.publish_reel(urls[0], urls[1], cap, token, uid)
+    else:
+        media_id, link = instagram.publish(urls, cap, token, uid)
     log.info("published %s %s", media_id, link)
 
     st = load_state()
@@ -198,26 +274,21 @@ def cmd_preview(a):
     stories = json.loads(Path(a.file).read_text())
     out = ROOT / "preview"
     date_str = nice_date(datetime.now(tz(c)))
-    title = a.title or "What moved India's economy"
-    if a.ai:
-        title = writer.write(stories, c)
-    else:
-        for s in stories:
-            s.setdefault("hook", s["title"]); s.setdefault("points", []); s.setdefault("why", "")
-    paths = cards.render_all(stories, title, date_str, c, out)
-    (out / "caption.txt").write_text(writer.caption(stories, title, c, date_str))
+    meta = writer.carousel(stories, c)
+    paths = cards2.render_carousel(stories, meta, date_str, c, out)
+    (out / "caption.txt").write_text(writer.caption_carousel(stories, meta, date_str))
     print("\n".join(map(str, paths)))
 
 
 def main():
     p = argparse.ArgumentParser(prog="feedbot")
     sp = p.add_subparsers(dest="cmd", required=True)
-    sp.add_parser("draft").set_defaults(fn=cmd_draft)
+    dr = sp.add_parser("draft"); dr.add_argument("--kind", choices=["carousel", "reel"], default="carousel"); dr.set_defaults(fn=cmd_draft)
     o = sp.add_parser("open-issue"); o.add_argument("--folder", required=True); o.set_defaults(fn=cmd_open_issue)
     pb = sp.add_parser("publish"); pb.add_argument("--issue", type=int); pb.add_argument("--folder")
     pb.add_argument("--dry-run", action="store_true"); pb.set_defaults(fn=cmd_publish)
     sp.add_parser("refresh-token").set_defaults(fn=cmd_refresh)
-    pv = sp.add_parser("preview"); pv.add_argument("file"); pv.add_argument("--title"); pv.add_argument("--ai", action="store_true")
+    pv = sp.add_parser("preview"); pv.add_argument("file"); pv.add_argument("--title")
     pv.set_defaults(fn=cmd_preview)
     a = p.parse_args()
     a.fn(a)

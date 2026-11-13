@@ -57,11 +57,18 @@ def fetch(cfg, tz):
                 title = clean(e.get("title"))
                 if not title:
                     continue
+                src = f["name"]
+                if f.get("aggregator"):  # Google News: "Headline - Publisher"
+                    pub = (e.get("source") or {}).get("title") or ""
+                    if " - " in title:
+                        title, tail = title.rsplit(" - ", 1)
+                        pub = pub or tail
+                    src = pub.strip() or src
                 stories.append({
                     "title": title,
                     "summary": clean(e.get("summary") or e.get("description"))[:900],
                     "link": e.get("link", ""),
-                    "source": f["name"],
+                    "source": src,
                     "source_weight": float(f.get("weight", 0)),
                     "region": f.get("region", "india"),
                     "published": _published(e, tz),
@@ -73,7 +80,35 @@ def fetch(cfg, tz):
     return stories
 
 
-def score_and_pick(stories, cfg, posted_sigs, now):
+def fetch_trends(cfg):
+    """Google Trends daily searches (India): search terms + their news headlines, as token sets."""
+    url = cfg.get("trends", {}).get("url")
+    if not url:
+        return []
+    try:
+        r = requests.get(url, headers=UA, timeout=25)
+        r.raise_for_status()
+        terms = []
+        for e in feedparser.parse(r.content).entries:
+            words = tokens(clean(e.get("title")))
+            for k, v in e.items():
+                if k.startswith("ht_news_item_title"):
+                    words |= tokens(clean(v))
+            if words:
+                terms.append(words)
+        log.info("trends ok %d topics", len(terms))
+        return terms
+    except Exception as ex:
+        log.warning("trends FAIL %s", ex)
+        return []
+
+
+def trend_boost(story_tokens, trends, cap):
+    hits = sum(1 for t in trends if len(story_tokens & t) >= 2)
+    return min(cap, 3.0 * hits)
+
+
+def score_and_pick(stories, cfg, posted_sigs, now, trends=(), quota=None):
     p = cfg["post"]
     window = timedelta(hours=p["lookback_hours"])
     excl = [x.lower() for x in cfg.get("exclude", [])]
@@ -120,16 +155,17 @@ def score_and_pick(stories, cfg, posted_sigs, now):
         age_h = min(((now - x["published"]).total_seconds() / 3600 for x in c if x["published"]), default=p["lookback_hours"] / 2)
         recency = max(0.0, 1 - age_h / p["lookback_hours"]) * 2
         sources = sorted({x["source"] for x in c})
-        score = lead["topic_score"] + 1.5 * (len(sources) - 1) + recency + lead["source_weight"]
+        tb = trend_boost(set().union(*(x["tokens"] for x in c)), trends, cfg.get("trends", {}).get("max_boost", 6))
+        score = lead["topic_score"] + 1.5 * (len(sources) - 1) + recency + lead["source_weight"] + tb
         if any(x["sig"] in posted_sigs for x in c) or score < p["min_score"]:
             continue
         region = "world" if any(x["region"] == "world" for x in c) else "india"
-        lead = dict(lead, score=round(score, 2), sources=sources, region=region,
+        lead = dict(lead, score=round(score, 2), sources=sources, region=region, trending=tb > 0,
                     links=[x["link"] for x in c], all_sigs=[x["sig"] for x in c])
         ranked.append(lead)
     ranked.sort(key=lambda x: -x["score"])
 
-    quota = {"india": int(p.get("india_stories", 4)), "world": int(p.get("world_stories", 2))}
+    quota = quota or {"india": int(p.get("india_stories", 2)), "world": int(p.get("world_stories", 1))}
     total = min(sum(quota.values()), 8)  # Instagram carousel: 10 slides incl. cover + closing
 
     def take(pool, n, picked, per_cat):

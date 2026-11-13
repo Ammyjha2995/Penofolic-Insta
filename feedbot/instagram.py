@@ -42,14 +42,14 @@ def account(token):
     return js.get("user_id") or js.get("id"), js.get("username")
 
 
-def _wait(container_id, token, tries=30):
+def _wait(container_id, token, tries=30, pause=4):
     for _ in range(tries):
         st = _call("GET", container_id, token, fields="status_code").get("status_code")
         if st == "FINISHED":
             return
         if st in ("ERROR", "EXPIRED"):
             raise IGError(f"container {container_id} status {st}")
-        time.sleep(4)
+        time.sleep(pause)
     raise IGError(f"container {container_id} not ready")
 
 
@@ -68,6 +68,21 @@ def publish(image_urls, caption, token, user_id=None):
         c = _call("POST", f"{user_id}/media", token, media_type="CAROUSEL",
                   children=",".join(children), caption=caption)["id"]
     _wait(c, token)
+    media_id = _call("POST", f"{user_id}/media_publish", token, creation_id=c)["id"]
+    try:
+        link = _call("GET", media_id, token, fields="permalink").get("permalink", "")
+    except IGError:
+        link = ""
+    return media_id, link
+
+
+def publish_reel(video_url, cover_url, caption, token, user_id=None):
+    """Reel: upload by URL, wait for Instagram to process the video (can take a few minutes), publish."""
+    user_id = user_id or account(token)[0]
+    c = _call("POST", f"{user_id}/media", token, media_type="REELS", video_url=video_url, cover_url=cover_url,
+              caption=caption, share_to_feed="true")["id"]
+    log.info("reel container %s", c)
+    _wait(c, token, tries=60, pause=10)
     media_id = _call("POST", f"{user_id}/media_publish", token, creation_id=c)["id"]
     try:
         link = _call("GET", media_id, token, fields="permalink").get("permalink", "")

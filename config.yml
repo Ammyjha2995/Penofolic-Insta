@@ -6,18 +6,35 @@ brand:
   website: penofolic.pages.dev    # shown on the last slide and in the caption
   timezone: Asia/Kolkata
 
+about:                       # founder strip on the last slide (photo: assets/founder.png)
+  name: "Amit Kumar"
+  title: "FOUNDER, PENOFOLIC"
+  credentials: ["Economist & Data Science Expert"]
+
 post:
-  india_stories: 4           # India stories in the daily carousel
-  world_stories: 2           # global stories (total of both: max 8)
+  india_stories: 2           # 8 AM carousel: 2 India + 1 World story (5 slides incl. hook + close)
+  world_stories: 1
   lookback_hours: 30         # only consider news published in this window
   min_score: 2.0             # stories scoring below this are ignored
   max_per_category: 2        # keeps the carousel varied
-  hashtags_base: ["#IndianEconomy", "#Economics", "#EconomyToday", "#Penofolic", "#PolicyMatters"]
+  # Exactly 5 hashtags per post: #Penofolic + 4 chosen for the story (AI), filled from these if needed
+  hashtag_brand: "#Penofolic"
+  hashtags_audience_india: ["#IndianEconomy", "#UPSCEconomy", "#EconomyExplained"]
+  hashtags_audience_world: ["#GlobalEconomy", "#WorldEconomy", "#EconomyExplained"]
+
+reel:
+  voice: en-IN-NeerjaNeural   # English (India) voice; "none" for music only
+  music: ""                   # path to an MP3 in the repo; empty = generated background track
 
 ai:
   enabled: true              # uses the ANTHROPIC_API_KEY secret if present; otherwise plain headlines
   model: claude-haiku-5-5
   max_tokens: 2500
+
+# Google Trends India: stories matching today's top searches get a "trending" boost.
+trends:
+  url: "https://trends.google.com/trending/rss?geo=IN"
+  max_boost: 6
 
 # News sources. A feed that fails on a given day is skipped, not fatal.
 # weight: added to every story from that source (official sources rank higher).
@@ -30,12 +47,26 @@ feeds:
   - {name: Economic Times,    url: "https://economictimes.indiatimes.com/news/economy/rssfeeds/1373380680.cms", weight: 0.5, region: india}
   - {name: BusinessLine,      url: "https://www.thehindubusinessline.com/economy/feeder/default.rss",    weight: 0.3, region: india}
   - {name: Financial Express, url: "https://www.financialexpress.com/about/economy/feed/",                weight: 0.3, region: india}
+  - {name: Google News,       url: "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-IN&gl=IN&ceid=IN:en", weight: 0.2, region: india, aggregator: true}
   # World
   - {name: US Federal Reserve, url: "https://www.federalreserve.gov/feeds/press_all.xml",    weight: 1.0, region: world}
   - {name: ECB,               url: "https://www.ecb.europa.eu/rss/press.html",                weight: 0.6, region: world}
   - {name: BBC Business,      url: "https://feeds.bbci.co.uk/news/business/rss.xml",          weight: 0.4, region: world}
   - {name: The Guardian,      url: "https://www.theguardian.com/business/economics/rss",      weight: 0.4, region: world}
   - {name: CNBC,              url: "https://www.cnbc.com/id/20910258/device/rss/rss.html",    weight: 0.4, region: world}
+
+# Hashtags per category (used when AI is off or to fill the 5 slots)
+category_tags:
+  Monetary policy: ["#RBI", "#MonetaryPolicy"]
+  Inflation: ["#Inflation", "#CPI"]
+  Growth: ["#GDP", "#EconomicGrowth"]
+  Fiscal: ["#PublicFinance", "#Budget"]
+  Trade: ["#Trade", "#Exports"]
+  Markets: ["#Rupee", "#Markets"]
+  Banking: ["#Banking", "#Finance"]
+  Jobs: ["#Jobs", "#Employment"]
+  Infrastructure: ["#Infrastructure", "#Capex"]
+  Investment: ["#Investment", "#FDI"]
 
 # Topic categories: keyword -> weight. A story's category is the one with the highest score.
 categories:
