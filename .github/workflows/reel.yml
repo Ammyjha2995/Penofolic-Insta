@@ -1,0 +1,55 @@
+name: 3. Evening Reel (8 PM)
+
+on:
+  schedule:
+    - cron: "33 13 * * *"  # 19:03 IST: Reel ready well before 8 PM
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency: feedbot-reel
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg libraqm0 >/dev/null
+      - run: pip install -q -r requirements.txt
+
+      - name: Pick the big story, write, voice and render the Reel
+        id: draft
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m feedbot draft --kind reel
+
+      - name: Commit Reel
+        if: steps.draft.outputs.folder != ''
+        run: |
+          git config user.name "penofolic-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A queue state
+          git commit -m "Draft: ${{ steps.draft.outputs.folder }}"
+          git pull --rebase -q && git push -q
+
+      - name: Open approval issue
+        if: steps.draft.outputs.folder != ''
+        id: issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -m feedbot open-issue --folder "${{ steps.draft.outputs.folder }}"
+
+      - name: Auto-publish (only if repository variable AUTO_PUBLISH = true)
+        if: steps.draft.outputs.folder != '' && vars.AUTO_PUBLISH == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          python -m feedbot publish --issue "${{ steps.issue.outputs.issue }}"
+          git add state && git commit -m "Published ${{ steps.draft.outputs.folder }}" && git pull --rebase -q && git push -q || true

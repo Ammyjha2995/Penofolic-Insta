@@ -1,15 +1,15 @@
-name: 1. Daily draft
+name: 1. Daily draft (8 AM carousel)
 
 on:
   schedule:
-    - cron: "17 1 * * *"   # 06:47 IST every day (GitHub cron is UTC)
-  workflow_dispatch: {}      # "Run workflow" button for a draft on demand
+    - cron: "33 1 * * *"   # 07:03 IST: draft ready well before 8 AM (GitHub cron is UTC and can run late)
+  workflow_dispatch: {}
 
 permissions:
   contents: write
   issues: write
 
-concurrency: feedbot
+concurrency: feedbot-draft
 
 jobs:
   draft:
@@ -22,18 +22,18 @@ jobs:
       - run: sudo apt-get install -y -qq libraqm0 >/dev/null || true
       - run: pip install -q -r requirements.txt
 
-      - name: Fetch news, write and render slides
+      - name: Fetch news, write and render the carousel
         id: draft
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python -m feedbot draft
+        run: python -m feedbot draft --kind carousel
 
       - name: Commit slides
         if: steps.draft.outputs.folder != ''
         run: |
           git config user.name "penofolic-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add queue state
+          git add -A queue state
           git commit -m "Draft: ${{ steps.draft.outputs.folder }}"
           git pull --rebase -q && git push -q
 
