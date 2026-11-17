@@ -1,0 +1,62 @@
+{
+ "type": "carousel",
+ "date": "17 November 2026",
+ "caption": "1.2%: India's CAD may touch 1.2% of GDP in FY27 as oil, gold demand pose risks: UBI\n\nThe Daily Brief · 17 November 2026\n\n1. India's CAD may touch 1.2% of GDP in FY27 as oil, gold demand pose risks: UBI (Economic Times)\n2. Two more Fed hikes, then a long pause: Goldman reads a third hot core CPI print (investingLive)\n3. UK unemployment unexpectedly eases to 4.6%, as government prepares to release Milburn report (The Guardian)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #Trade #Exports #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "India's CAD may touch 1.2% of GDP in FY27 as oil, gold demand pose risks: UBI",
+   "hook": "India's CAD may touch 1.2% of GDP in FY27 as oil, gold demand pose risks: UBI",
+   "points": [
+    "India's current account deficit is projected to reach 1.2% of GDP in FY27, driven by oil prices, according to a report by Union Bank of India."
+   ],
+   "why": "",
+   "category": "Trade",
+   "region": "india",
+   "sources": [
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/indicators/indias-cad-may-touch-1-2-of-gdp-in-fy27-as-oil-gold-demand-pose-risks-ubi/articleshow/135914575.cms",
+   "score": 23.32,
+   "trending": false
+  },
+  {
+   "title": "Two more Fed hikes, then a long pause: Goldman reads a third hot core CPI print",
+   "hook": "Two more Fed hikes, then a long pause: Goldman reads a third hot core CPI print",
+   "points": [
+    "Two more Fed hikes, then a long pause: Goldman reads a third hot core CPI print investingLive Is a December rate shock coming for Americans?"
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "india",
+   "sources": [
+    "investingLive"
+   ],
+   "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQeVQzOEZHV0pTY1pDYmpRaWd4SVVhQzhuV0d2ZVd1aXBoMG5kaEc3aVFid2lTU0UyNU12VU9tMHk0azhrSW5LaGZERUNBZGw3dklIRVBNc1NRN0sxc0ZmU1FmRV9DRVRPM29DQzJObXF3bkEwQ1Q3YUNqWHJwMXV0bG16b1hwWlVhUzZ6cjFpR3FmWlJMUVpEYnoteVE3LWd6eHpycTFpdk5EQW40aVh2d2JfVzhEUzVIUVE?oc=5",
+   "score": 19.68,
+   "trending": false
+  },
+  {
+   "title": "UK unemployment unexpectedly eases to 4.6%, as government prepares to release Milburn report",
+   "hook": "UK unemployment unexpectedly eases to 4.6%, as government prepares to release Milburn report",
+   "points": [
+    "Wage growth falls to 3.5% in September, as ministers examine how best to get young people into work Milburn urges Burnham to spend billions on young…"
+   ],
+   "why": "",
+   "category": "Jobs",
+   "region": "world",
+   "sources": [
+    "The Guardian"
+   ],
+   "link": "https://www.theguardian.com/business/2026/nov/17/uk-unemployment-wage-growth-milburn-report",
+   "score": 11.79,
+   "trending": false
+  }
+ ]
+}
