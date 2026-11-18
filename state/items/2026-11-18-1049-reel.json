@@ -2,7 +2,7 @@
  "at": "2026-11-18T05:20:21.858196+00:00",
  "folder": "queue/2026-11-18-1049-reel",
  "type": "reel",
- "status": "drafted",
+ "status": "published",
  "sigs": [
   "f872c209d036"
  ],
@@ -29,5 +29,7 @@
     "warsh"
    ]
   }
- ]
+ ],
+ "media_id": "18038500976853129",
+ "permalink": "https://www.instagram.com/reel/Df3voQLjUl4/"
 }
