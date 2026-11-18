@@ -239,8 +239,48 @@ def s_ring(t, c):
     return img
 
 
-FN = {"hook": s_hook, "what": s_what, "chart": s_chart, "ring": s_ring, "why": s_why, "outro": s_outro}
-MIN = {"hook": 4.5, "what": 6.0, "chart": 6.5, "ring": 5.5, "why": 5.0, "outro": 5.0}
+def s_context(t, c):
+    """Background: 2-3 numbered facts revealed one by one."""
+    img = base(); d = ImageDraw.Draw(img)
+    spaced(d, (M, 380), "THE CONTEXT", font("sans", 28, "Bold"), GOLD2)
+    d.rectangle((M, 440, M + int(140 * appear(t, 0.1, 0.6)), 446), fill=GOLD)
+    y = 520
+    nf, tf = font("serif", 84, "SemiBold"), font("sans", 46, "Medium")
+    for k, x in enumerate(c["context"][:3]):
+        st = 0.4 + k * 1.6
+        al = appear(t, st)
+        if al > 0:
+            layer = Image.new("RGBA", img.size, (0, 0, 0, 0)); ld = ImageDraw.Draw(layer)
+            ld.text((M, y - 14 + (1 - al) * 20), f"{k + 1}", font=nf, fill=GOLD + (int(255 * al),), features=FEAT)
+            img.alpha_composite(layer)
+        for ln in wrap(d, x, tf, W - 2 * M - 90)[:3]:
+            blend_text(img, (M + 90, y), ln, tf, (226, 232, 238), al)
+            y += 62
+        y += 70
+    return img
+
+
+def s_watch(t, c):
+    """What to watch next."""
+    img = base(); d = ImageDraw.Draw(img)
+    spaced(d, (M, 420), "WHAT TO WATCH NEXT", font("sans", 28, "Bold"), GOLD2)
+    al = appear(t, 0.2, 0.5)
+    w = int((W - 2 * M) * ease((t - 0.1) / 0.8))
+    d.rectangle((M, 480, M + w, 484), fill=GOLD)
+    wf = font("serif", 84, "SemiBold")
+    y = 560
+    for k, ln in enumerate(wrap(d, c["watch"], wf, W - 2 * M)[:6]):
+        blend_text(img, (M, y), ln, wf, WHITE, appear(t, 0.4 + k * 0.3))
+        y += 100
+    d.rectangle((M, y + 40, M + 6, y + 120), fill=GOLD)
+    blend_text(img, (M + 30, y + 52), "Follow so you don't miss it.", font("italic", 48, "Medium"), GOLD2, appear(t, 2.0))
+    return img
+
+
+FN = {"hook": s_hook, "what": s_what, "context": s_context, "chart": s_chart, "ring": s_ring, "why": s_why,
+      "watch": s_watch, "outro": s_outro}
+MIN = {"hook": 4.5, "what": 6.5, "context": 6.5, "chart": 6.5, "ring": 6.0, "why": 6.0, "watch": 5.5, "outro": 5.0}
+STRETCH = ("what", "context", "chart", "ring", "why", "watch")  # scenes that absorb extra time to reach the target
 
 
 def frame(t_total, c, cache, scenes=None):
@@ -294,6 +334,19 @@ def ambient_track(path, seconds, sr=44100):
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(sr); w.writeframes(out.tobytes())
 
 
+def _tempo(clip, f, work):
+    """Time-stretch a mono 44.1 kHz clip by factor f with ffmpeg atempo (keeps pitch)."""
+    src, dst = work / "tempo-in.wav", work / "tempo-out.wav"
+    with wave.open(str(src), "w") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(44100)
+        w.writeframes((np.clip(clip, -1, 1) * 32767).astype(np.int16).tobytes())
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-filter:a", f"atempo={f:.3f}", str(dst)], check=True)
+    with wave.open(str(dst)) as w:
+        out = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+    src.unlink(missing_ok=True); dst.unlink(missing_ok=True)
+    return out
+
+
 def _load_music(path, seconds):
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-stream_loop", "-1", "-i", str(path), "-t", str(seconds),
                           "-f", "s16le", "-ac", "1", "-ar", "44100", "-"], capture_output=True, check=True).stdout
@@ -306,16 +359,32 @@ def render(c, out_mp4, music=None, voice=None, workdir=None):
     out_mp4 = Path(out_mp4); out_mp4.parent.mkdir(parents=True, exist_ok=True)
     work = Path(workdir or out_mp4.parent)
     chart = {"bars": "chart", "ring": "ring"}.get(c.get("kind"))
-    names = ["hook", "what"] + ([chart] if chart else []) + (["why"] if c.get("why") else []) + ["outro"]
-    clips, scenes = {}, []
+    names = (["hook", "what"] + (["context"] if c.get("context") else []) + ([chart] if chart else [])
+             + (["why"] if c.get("why") else []) + (["watch"] if c.get("watch") else []) + ["outro"])
+    clips = {}
     for nm in names:
-        key = "chart" if nm in ("chart", "ring") else nm
+        key = "chart" if nm in ("chart", "ring") else nm  # voice key
         text = (voice or {}).get(key)
         clip = tts.synth(text, c.get("voice_name", "en-IN-NeerjaNeural"), work / f"vo-{key}.mp3") if text else None
         if clip is not None:
             clips[nm] = clip
-        dur = MIN[nm] if clip is None else max(MIN[nm], len(clip) / 44100 + 1.0)
-        scenes.append((nm, round(dur, 2)))
+    target = float(c.get("target_seconds") or 0)
+
+    def plan():
+        return [(nm, round(MIN[nm] if nm not in clips else max(MIN[nm], len(clips[nm]) / 44100 + 0.6), 2)) for nm in names]
+
+    scenes = plan()
+    over = sum(d for _, d in scenes) - (target + 2)
+    if target and over > 0 and clips:  # narration too long: speed it up a little (max 15%, pitch unchanged)
+        speech = sum(len(v) / 44100 for v in clips.values())
+        f = min(1.15, speech / max(1.0, speech - over))
+        clips = {k: _tempo(v, f, work) for k, v in clips.items()}
+        scenes = plan()
+    short = target - sum(x[1] for x in scenes)
+    flex = [i for i, (nm, _) in enumerate(scenes) if nm in STRETCH]
+    if short > 0 and flex:  # spread the missing time over the content scenes (animations finish, then hold)
+        add = short / len(flex)
+        scenes = [(nm, round(d + add, 2)) if i in flex else (nm, d) for i, (nm, d) in enumerate(scenes)]
     total = sum(x[1] for x in scenes)
 
     # audio: music bed ducked under voice

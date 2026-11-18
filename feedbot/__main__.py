@@ -94,6 +94,8 @@ def reel_content(r, c):
     out = {"kind": f["kind"], "value": value, "fmt": fmt, "change": f.get("change"), "up": f.get("up") is not False,
            "question": r["question"], "tag": r["tag"], "headline": r["headline"], "points": r["points"],
            "chart_title": r["chart_title"], "why": r["why"], "source": r["source"],
+           "context": r.get("context", []), "watch": r.get("watch", ""),
+           "target_seconds": c.get("reel", {}).get("target_seconds", 45),
            "founder": a.get("name", "Amit Kumar"), "founder_title": a.get("title", "FOUNDER, PENOFOLIC"),
            "founder_line": " · ".join(a.get("credentials", [])), "handle": c["brand"]["handle"],
            "voice_name": c.get("reel", {}).get("voice", "en-IN-NeerjaNeural")}
@@ -108,15 +110,19 @@ def reel_content(r, c):
 def _pick(c, now, quota):
     st = load_state()
     sigs = {s for x in st["items"] for s in x.get("sigs", [])}
+    days = c.get("dedupe", {}).get("days", 14)
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    seen = [t for x in st["items"] if x.get("at", "") >= cutoff for t in x.get("topics", []) if isinstance(t, dict)]
     stories = news.fetch(c, tz(c))
     trends = news.fetch_trends(c)
-    return news.score_and_pick(stories, c, sigs, now.astimezone(timezone.utc), trends, quota)
+    return news.score_and_pick(stories, c, sigs, now.astimezone(timezone.utc), trends, quota, seen)
 
 
 def _record(folder, kind, picked):
     prune_items()
     save_item({"at": datetime.now(timezone.utc).isoformat(), "folder": str(folder.relative_to(ROOT)), "type": kind,
-               "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]]})
+               "status": "drafted", "sigs": [g for s in picked for g in s["all_sigs"]],
+               "titles": [s["title"] for s in picked], "topics": [s.get("topic", {}) for s in picked]})
 
 
 def _prune(days=10):

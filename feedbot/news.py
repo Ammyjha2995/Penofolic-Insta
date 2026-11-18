@@ -108,7 +108,30 @@ def trend_boost(story_tokens, trends, cap):
     return min(cap, 3.0 * hits)
 
 
-def score_and_pick(stories, cfg, posted_sigs, now, trends=(), quota=None):
+GENERIC = set("""rise rises rose rising fall falls fell up down jump jumps jumped surge surges hit hits record new data
+year years month months week weeks day days fiscal far till since amid ahead first last next per cent percent rate rates
+growth grow grows grew higher lower high low crore lakh trillion billion million total share shares says said report
+reports likely seen expected sees set sets top major big key time times cut cuts hike hikes keeps keep holds hold check
+january february march april may june july august september october november december quarter""".split())
+
+
+def key_terms(words):
+    """Distinctive words only: no numbers, no generic movement/size words."""
+    return {w for w in words if w not in GENERIC and not any(ch.isdigit() for ch in w)}
+
+
+def same_topic(a, b, thr=0.3, cat_a=None, cat_b=None):
+    """Same story if the headlines overlap strongly, or (same category and >= 2 distinctive shared words)."""
+    if not a or not b:
+        return False
+    inter = len(a & b)
+    jac = inter / len(a | b)
+    if jac >= thr or (inter >= 4 and jac >= 0.2):
+        return True
+    return bool(cat_a) and cat_a == cat_b and len(key_terms(a) & key_terms(b)) >= 2
+
+
+def score_and_pick(stories, cfg, posted_sigs, now, trends=(), quota=None, seen_topics=()):
     p = cfg["post"]
     window = timedelta(hours=p["lookback_hours"])
     excl = [x.lower() for x in cfg.get("exclude", [])]
@@ -159,8 +182,14 @@ def score_and_pick(stories, cfg, posted_sigs, now, trends=(), quota=None):
         score = lead["topic_score"] + 1.5 * (len(sources) - 1) + recency + lead["source_weight"] + tb
         if any(x["sig"] in posted_sigs for x in c) or score < p["min_score"]:
             continue
+        thr = cfg.get("dedupe", {}).get("similarity", 0.3)
+        if any(same_topic(x["tokens"], set(prev.get("words", [])), thr, x["category"], prev.get("cat"))
+               for x in c for prev in seen_topics):
+            log.info("skip (already covered) %s", lead["title"])
+            continue
         region = "world" if any(x["region"] == "world" for x in c) else "india"
         lead = dict(lead, score=round(score, 2), sources=sources, region=region, trending=tb > 0,
+                    topic={"cat": lead["category"], "words": sorted(set().union(*(x["tokens"] for x in c)))},
                     links=[x["link"] for x in c], all_sigs=[x["sig"] for x in c])
         ranked.append(lead)
     ranked.sort(key=lambda x: -x["score"])

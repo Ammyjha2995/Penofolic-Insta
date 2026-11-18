@@ -10,7 +10,7 @@ SR = 44100
 
 def _edge(text, voice, path):
     import edge_tts
-    asyncio.run(edge_tts.Communicate(text, voice, rate="+4%").save(str(path)))
+    asyncio.run(edge_tts.Communicate(text, voice, rate="+8%").save(str(path)))
 
 
 def _gtts(text, path):

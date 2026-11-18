@@ -34,12 +34,15 @@ STORIES:
 
 REEL = RULES + """
 
-You write Penofolic's 8 PM Instagram Reel about ONE story (about 25 seconds, English voiceover). Return ONLY JSON:
+You write Penofolic's 8 PM Instagram Reel about ONE story (about 45 seconds, English voiceover). Return ONLY JSON:
 {"question": "hook question, max 10 words", "headline": "max 12 words", "points": ["max 16 words", "max 16 words"],
+ "context": ["background fact from TEXT, max 16 words", "max 16 words", "optional third, max 16 words"],
  "why": "max 26 words, why it matters to an ordinary Indian", "chart_title": "max 6 words",
+ "watch": "max 24 words: what to watch next (next data release, decision or trend), only if the TEXT supports it, else empty",
  "caption_hook": "first caption line, max 110 characters", "hashtags": ["#Tag1", "#Tag2", "#Tag3", "#Tag4"],
- "vo": {"hook": "spoken, max 16 words", "what": "spoken, max 30 words", "chart": "spoken, max 20 words",
-        "why": "spoken, max 28 words"}}
+ "vo": {"hook": "spoken, max 14 words", "what": "spoken, max 22 words", "context": "spoken, max 24 words",
+        "chart": "spoken, max 16 words", "why": "spoken, max 22 words", "watch": "spoken, max 16 words or empty"}}
+The whole voiceover must be readable in about 40 seconds (about 110 words in total).
 Write voiceover for the ear: short sentences, say "rupees 14.42 trillion" not "₹14.42 tn".
 
 STORY:
@@ -166,8 +169,13 @@ def reel(story, cfg):
     headline = ok("headline", 110, _trim(s["title"], 110))
     points = [_trim(p, 140) for p in (g.get("points") or [])[:2] if _safe(p, src)] or _first_sentence(s.get("summary"), s["title"])
     why = ok("why", 200, "")
+    context = [_trim(x, 130) for x in (g.get("context") or [])[:3] if _safe(x, src)]
+    if not context:  # no AI: further sentences of the feed summary, beyond what is already shown
+        sents = [x for x in re.split(r"(?<=[.!?])\s+", (s.get("summary") or "").strip()) if len(x.split()) > 5]
+        context = [_trim(x, 130) for x in sents[1:3] if x not in " ".join(points)]
+    watch = ok("watch", 170, "")
     vo = g.get("vo") or {}
-    vos = {k: (_trim(vo.get(k), 220) if _safe(vo.get(k), src) else "") for k in ("hook", "what", "chart", "why")}
+    vos = {k: (_trim(vo.get(k), 240) if _safe(vo.get(k), src) else "") for k in ("hook", "what", "context", "chart", "why", "watch")}
     if not vos["what"]:
         vos["what"] = headline
     if not vos["hook"]:
@@ -177,7 +185,7 @@ def reel(story, cfg):
     return {
         "fig": fig, "tag": ("WORLD · " if s.get("region") == "world" else "INDIA · ") + s["category"].upper(),
         "question": ok("question", 80, "What does it mean for you?"), "headline": headline, "points": points,
-        "why": why, "chart_title": ok("chart_title", 40, _trim(" ".join(headline.split()[:6]), 40)),
+        "why": why, "context": context, "watch": watch, "chart_title": ok("chart_title", 40, _trim(" ".join(headline.split()[:6]), 40)),
         "source": ", ".join(s["sources"][:2]), "vo": vos,
         "caption_hook": ok("caption_hook", 120, (f"{fig['figure']}: " if fig.get("figure") else "") + headline),
         "hashtags": hashtags(cfg, [s], g.get("hashtags")),
@@ -187,8 +195,12 @@ def reel(story, cfg):
 def caption_reel(r, date_str):
     lines = [r["caption_hook"], ""] + ([r["headline"], ""] if r["headline"] not in r["caption_hook"] else [])
     lines += [f"• {p}" for p in r["points"]] or [""]
+    if r.get("context"):
+        lines += ["", "Context:"] + [f"• {x}" for x in r["context"]]
     if r["why"]:
         lines += ["", "Why it matters: " + r["why"]]
+    if r.get("watch"):
+        lines += ["", "What to watch: " + r["watch"]]
     lines += ["", f"Source: {r['source']} · {date_str}", "Follow for daily economics, explained. Not investment advice.", "",
               " ".join(r["hashtags"])]
     return "\n".join(lines)[:2150]
