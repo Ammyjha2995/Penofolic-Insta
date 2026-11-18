@@ -1,0 +1,64 @@
+{
+ "at": "2026-11-18T09:02:31.576291+00:00",
+ "folder": "queue/2026-11-18-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "1eff2aba03ac",
+  "b7ea2449ba42",
+  "93032f80d15a",
+  "293e5be96a57",
+  "514da14c60c1"
+ ],
+ "titles": [
+  "Wholesale inflation at 4-year high. How it is eating into budgets of Indian households",
+  "Indian economic growth seen at annual 7.6% in July-September quarter, economists say",
+  "UK inflation rises to 3.6% after petrol and diesel prices hit record high"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "budgets",
+    "eating",
+    "high",
+    "households",
+    "how",
+    "inflation",
+    "wholesale",
+    "year"
+   ]
+  },
+  {
+   "cat": "Growth",
+   "words": [
+    "annual",
+    "economic",
+    "economists",
+    "growth",
+    "july",
+    "quarter",
+    "say",
+    "seen",
+    "september"
+   ]
+  },
+  {
+   "cat": "Inflation",
+   "words": [
+    "diesel",
+    "drive",
+    "high",
+    "higher",
+    "hit",
+    "inflation",
+    "petrol",
+    "prices",
+    "push",
+    "record",
+    "rises",
+    "year"
+   ]
+  }
+ ]
+}
