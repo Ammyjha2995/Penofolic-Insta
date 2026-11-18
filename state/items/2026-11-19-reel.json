@@ -1,0 +1,30 @@
+{
+ "at": "2026-11-18T21:34:34.703084+00:00",
+ "folder": "queue/2026-11-19-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "e1a94bb87e78"
+ ],
+ "titles": [
+  "RBI may hike interest rates by 75 basis points by Q2 of next year: Goldman Sachs"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "basis",
+    "goldman",
+    "hike",
+    "interest",
+    "may",
+    "next",
+    "points",
+    "rates",
+    "rbi",
+    "sachs",
+    "year"
+   ]
+  }
+ ]
+}
