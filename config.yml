@@ -25,11 +25,17 @@ post:
 reel:
   voice: en-IN-NeerjaNeural   # English (India) voice; "none" for music only
   music: ""                   # path to an MP3 in the repo; empty = generated background track
+  target_seconds: 45          # Reel length; scenes stretch to reach it
 
 ai:
   enabled: true              # uses the ANTHROPIC_API_KEY secret if present; otherwise plain headlines
   model: claude-haiku-5-5
   max_tokens: 2500
+
+# No repeats: a story is skipped if it is about the same topic as anything drafted in the last `days`
+dedupe:
+  days: 14
+  similarity: 0.3    # lower = stricter (0.25 strict, 0.4 lenient)
 
 # Google Trends India: stories matching today's top searches get a "trending" boost.
 trends:
