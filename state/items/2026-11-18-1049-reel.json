@@ -1,0 +1,33 @@
+{
+ "at": "2026-11-18T05:20:21.858196+00:00",
+ "folder": "queue/2026-11-18-1049-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "f872c209d036"
+ ],
+ "titles": [
+  "Could AI boom trigger a jobs crisis? The risks Fed Chair Kevin Warsh sees beyond productivity gains"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "beyond",
+    "boom",
+    "chair",
+    "could",
+    "crisis",
+    "fed",
+    "gains",
+    "jobs",
+    "kevin",
+    "productivity",
+    "risks",
+    "sees",
+    "trigger",
+    "warsh"
+   ]
+  }
+ ]
+}
