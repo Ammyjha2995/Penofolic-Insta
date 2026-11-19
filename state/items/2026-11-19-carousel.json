@@ -1,0 +1,61 @@
+{
+ "at": "2026-11-19T09:26:46.627357+00:00",
+ "folder": "queue/2026-11-19-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "b8c3c0535dce",
+  "07dd1167e0f2",
+  "a2e670f401c9"
+ ],
+ "titles": [
+  "IMF chief calls for tighter monetary policy as global inflation rises to 4.7%",
+  "UK inflation hits one-year high of 3.6%: Why are markets less convinced of another rate hike? | Explained",
+  "How high is UK inflation and how will you be affected?"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "calls",
+    "chief",
+    "global",
+    "imf",
+    "inflation",
+    "monetary",
+    "policy",
+    "rises",
+    "tighter"
+   ]
+  },
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "another",
+    "convinced",
+    "explained",
+    "high",
+    "hike",
+    "hits",
+    "inflation",
+    "less",
+    "markets",
+    "one",
+    "rate",
+    "why",
+    "year"
+   ]
+  },
+  {
+   "cat": "Inflation",
+   "words": [
+    "affected",
+    "high",
+    "how",
+    "inflation",
+    "will",
+    "you"
+   ]
+  }
+ ]
+}

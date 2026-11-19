@@ -1,0 +1,62 @@
+{
+ "type": "carousel",
+ "date": "19 November 2026",
+ "caption": "4.7%: IMF chief calls for tighter monetary policy as global inflation rises to 4.7%\n\nThe Daily Brief · 19 November 2026\n\n1. IMF chief calls for tighter monetary policy as global inflation rises to 4.7% (BusinessLine)\n2. UK inflation hits one-year high of 3.6%: Why are markets less convinced of another rate hike? | Explained (Mint)\n3. How high is UK inflation and how will you be affected? (BBC Business)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #RBI #MonetaryPolicy #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "IMF chief calls for tighter monetary policy as global inflation rises to 4.7%",
+   "hook": "IMF chief calls for tighter monetary policy as global inflation rises to 4.7%",
+   "points": [
+    "Speaking at the APEC summit in Shenzhen, Kristalina Georgieva highlighted mounting inflationary pressures from energy supply disruptions and…"
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "india",
+   "sources": [
+    "BusinessLine"
+   ],
+   "link": "https://www.thehindubusinessline.com/news/national/imf-chief-calls-for-tighter-monetary-policy-as-global-inflation-rises-to-47/article71718568.ece",
+   "score": 18.9,
+   "trending": false
+  },
+  {
+   "title": "UK inflation hits one-year high of 3.6%: Why are markets less convinced of another rate hike? | Explained",
+   "hook": "UK inflation hits one-year high of 3.6%: Why are markets less convinced of another rate hike? | Explained",
+   "points": [
+    "UK inflation rose to a one-year high of 3.6% in October, driven by higher fuel prices and tobacco taxes."
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "india",
+   "sources": [
+    "Mint"
+   ],
+   "link": "https://www.livemint.com/economy/uk-inflation-hits-one-year-high-of-3-6-why-are-markets-less-convinced-of-another-rate-hike-explained-11795024910397.html",
+   "score": 17.5,
+   "trending": false
+  },
+  {
+   "title": "How high is UK inflation and how will you be affected?",
+   "hook": "How high is UK inflation and how will you be affected?",
+   "points": [
+    "Prices rose 3.6% in the year to October, mainly because of higher petrol and diesel prices, official figures show."
+   ],
+   "why": "",
+   "category": "Inflation",
+   "region": "world",
+   "sources": [
+    "BBC Business"
+   ],
+   "link": "https://www.bbc.co.uk/news/videos/cxp80q5pv4q5o?at_medium=RSS&at_campaign=rss",
+   "score": 7.48,
+   "trending": false
+  }
+ ]
+}
