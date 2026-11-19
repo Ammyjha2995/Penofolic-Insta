@@ -1,0 +1,38 @@
+{
+ "type": "reel",
+ "date": "20 November 2026",
+ "caption": "7.2%: Goldman Sachs sees India GDP growth moderating to 7.2% in 2027, inflation rising to 5.7%\n\n• The higher inflation outlook is attributed to possible weather disruptions linked to El Niño and elevated input costs\n\nSource: BusinessLine · 20 November 2026\nFollow for daily economics, explained. Not investment advice.\n\n#Penofolic #GDP #EconomicGrowth #IndianEconomy #UPSCEconomy",
+ "video": "reel.mp4",
+ "cover": "cover.jpg",
+ "slides": [
+  "cover.jpg"
+ ],
+ "scenes": [
+  [
+   "hook",
+   4.5
+  ],
+  [
+   "what",
+   19.91
+  ],
+  [
+   "ring",
+   15.59
+  ],
+  [
+   "outro",
+   5.0
+  ]
+ ],
+ "stories": [
+  {
+   "hook": "Goldman Sachs sees India GDP growth moderating to 7.2% in 2027, inflation rising to 5.7%",
+   "sources": [
+    "BusinessLine"
+   ],
+   "link": "https://www.thehindubusinessline.com/economy/goldman-sachs-sees-india-gdp-growth-moderating-to-72-in-2027-inflation-rising-to-57/article71718607.ece",
+   "title": "Goldman Sachs sees India GDP growth moderating to 7.2% in 2027, inflation rising to 5.7%"
+  }
+ ]
+}

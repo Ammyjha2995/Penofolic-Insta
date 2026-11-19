@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-19T21:45:48.838434+00:00",
+ "folder": "queue/2026-11-20-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "bd91c791ea42"
+ ],
+ "titles": [
+  "Goldman Sachs sees India GDP growth moderating to 7.2% in 2027, inflation rising to 5.7%"
+ ],
+ "topics": [
+  {
+   "cat": "Growth",
+   "words": [
+    "2027",
+    "gdp",
+    "goldman",
+    "growth",
+    "inflation",
+    "moderating",
+    "rising",
+    "sachs",
+    "sees"
+   ]
+  }
+ ]
+}
