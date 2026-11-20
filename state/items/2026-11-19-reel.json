@@ -2,7 +2,7 @@
  "at": "2026-11-18T21:34:34.703084+00:00",
  "folder": "queue/2026-11-19-reel",
  "type": "reel",
- "status": "drafted",
+ "status": "published",
  "sigs": [
   "e1a94bb87e78"
  ],
@@ -26,5 +26,7 @@
     "year"
    ]
   }
- ]
+ ],
+ "media_id": "18468180559189333",
+ "permalink": "https://www.instagram.com/reel/Df9GgCmlT8Z/"
 }
