@@ -1,0 +1,27 @@
+{
+ "at": "2026-11-20T21:30:05.922752+00:00",
+ "folder": "queue/2026-11-21-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "37ba0f7c000a"
+ ],
+ "titles": [
+  "RBI clarifies forex reporting rules for service imports, exports"
+ ],
+ "topics": [
+  {
+   "cat": "Trade",
+   "words": [
+    "clarifies",
+    "exports",
+    "forex",
+    "imports",
+    "rbi",
+    "reporting",
+    "rules",
+    "service"
+   ]
+  }
+ ]
+}
