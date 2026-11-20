@@ -1,0 +1,62 @@
+{
+ "type": "carousel",
+ "date": "20 November 2026",
+ "caption": "RBI to conduct Second 3-day Variable Rate Repo (VRR) auction under LAF on November 20, 2026\n\nThe Daily Brief · 20 November 2026\n\n1. RBI to conduct Second 3-day Variable Rate Repo (VRR) auction under LAF on November 20, 2026 (RBI)\n2. U.K.-India trade deal faces a stiff test over Scotch whisky import taxes (CNBC)\n3. AI demand will push up interest rates around the world, IMF head warns (The Guardian)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #RBI #MonetaryPolicy #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "RBI to conduct Second 3-day Variable Rate Repo (VRR) auction under LAF on November 20, 2026",
+   "hook": "RBI to conduct Second 3-day Variable Rate Repo (VRR) auction under LAF on November 20, 2026",
+   "points": [
+    "On a review of current and evolving liquidity conditions in the near term, it has been decided to conduct a second Variable Rate Repo (VRR) auction…"
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "india",
+   "sources": [
+    "RBI"
+   ],
+   "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64008",
+   "score": 17.5,
+   "trending": true
+  },
+  {
+   "title": "U.K.-India trade deal faces a stiff test over Scotch whisky import taxes",
+   "hook": "U.K.-India trade deal faces a stiff test over Scotch whisky import taxes",
+   "points": [
+    "U.K.-India trade deal faces a stiff test over Scotch whisky import taxes CNBC Stocks of Diageo, other liquor makers fall in India on Scotch tariff…"
+   ],
+   "why": "",
+   "category": "Trade",
+   "region": "india",
+   "sources": [
+    "CNBC"
+   ],
+   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9EeW5WVFZYbWJnYm9Zd2d3djZWR0JwdnBsVjhQZHRONjVPSHU3YjZpdkJqczNyLS1EaHhtTWVPNFhCd0x6cnIxYzNqeTYxNUlQaHNvWkdZOFpXTERHaGhTdzdUMDV3bkc4V25IQk4tZnVyWm9OYjg0Zi1fcVhpZ9IBgwFBVV95cUxPNzJtRkhBLUZfMVFLMEpmTHNmUGdjd2tyZWJpZHVieDU2LUpWSW05MlBPLUZobi1jMTNhU09jcUtWS3NRemtORFhNUzFzbGVETzB0ZHo4eXExSkRTZ3BVUXYzSFJVNVgtSERRdkFBQkhubWRhY0JLZ1BraEdxZkl0V1E2OA?oc=5",
+   "score": 16.94,
+   "trending": false
+  },
+  {
+   "title": "AI demand will push up interest rates around the world, IMF head warns",
+   "hook": "AI demand will push up interest rates around the world, IMF head warns",
+   "points": [
+    "Kristalina Georgieva says countries needed to be ready for tech rollout, adding: ‘You snooze, you lose’ Business live – latest updates Booming…"
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "world",
+   "sources": [
+    "The Guardian"
+   ],
+   "link": "https://www.theguardian.com/world/2026/nov/19/imf-head-warns-ai-demand-push-up-interest-rates-apec",
+   "score": 13.21,
+   "trending": false
+  }
+ ]
+}
