@@ -1,0 +1,60 @@
+{
+ "type": "carousel",
+ "date": "21 November 2026",
+ "caption": "7%: India's growth story intact at 7%, but energy costs and twin deficits cloud the outlook: Report\n\nThe Daily Brief · 21 November 2026\n\n1. India's growth story intact at 7%, but energy costs and twin deficits cloud the outlook: Report (BusinessLine)\n2. Rising capital goods trade, record coastal shipments to drive India's port cargo growth (BusinessLine)\n3. Federal Reserve announces College Fed Challenge winners (US Federal Reserve)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #Infrastructure #Capex #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "India's growth story intact at 7%, but energy costs and twin deficits cloud the outlook: Report",
+   "hook": "India's growth story intact at 7%, but energy costs and twin deficits cloud the outlook: Report",
+   "points": [
+    "Amundi Investment Institute expects strong domestic demand, infrastructure spending and manufacturing growth to support the economy, even as…"
+   ],
+   "why": "",
+   "category": "Infrastructure",
+   "region": "india",
+   "sources": [
+    "BusinessLine"
+   ],
+   "link": "https://www.thehindubusinessline.com/markets/indias-growth-story-intact-at-7-but-energy-costs-and-twin-deficits-cloud-the-outlook-report/article71724821.ece",
+   "score": 15.06,
+   "trending": false
+  },
+  {
+   "title": "Rising capital goods trade, record coastal shipments to drive India's port cargo growth",
+   "hook": "Rising capital goods trade, record coastal shipments to drive India's port cargo growth",
+   "points": [
+    "Stronger imports and exports, record coastal shipments and increased movement of engineering goods supported cargo activity across Indian ports in…"
+   ],
+   "why": "",
+   "category": "Trade",
+   "region": "india",
+   "sources": [
+    "BusinessLine"
+   ],
+   "link": "https://www.thehindubusinessline.com/economy/logistics/rising-capital-goods-trade-record-coastal-shipments-to-drive-indias-port-cargo-growth/article71727423.ece",
+   "score": 12.63,
+   "trending": false
+  },
+  {
+   "title": "Federal Reserve announces College Fed Challenge winners",
+   "hook": "Federal Reserve announces College Fed Challenge winners",
+   "points": [],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "world",
+   "sources": [
+    "US Federal Reserve"
+   ],
+   "link": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120b.htm",
+   "score": 12.23,
+   "trending": false
+  }
+ ]
+}

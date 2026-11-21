@@ -1,0 +1,62 @@
+{
+ "at": "2026-11-21T08:44:22.609326+00:00",
+ "folder": "queue/2026-11-21-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "86138a1ff49d",
+  "0e9a213d2ec8",
+  "996c94d4b40f"
+ ],
+ "titles": [
+  "India's growth story intact at 7%, but energy costs and twin deficits cloud the outlook: Report",
+  "Rising capital goods trade, record coastal shipments to drive India's port cargo growth",
+  "Federal Reserve announces College Fed Challenge winners"
+ ],
+ "topics": [
+  {
+   "cat": "Infrastructure",
+   "words": [
+    "but",
+    "cloud",
+    "costs",
+    "deficits",
+    "energy",
+    "growth",
+    "intact",
+    "outlook",
+    "report",
+    "story",
+    "twin"
+   ]
+  },
+  {
+   "cat": "Trade",
+   "words": [
+    "capital",
+    "cargo",
+    "coastal",
+    "drive",
+    "goods",
+    "growth",
+    "port",
+    "record",
+    "rising",
+    "shipments",
+    "trade"
+   ]
+  },
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "announces",
+    "challenge",
+    "college",
+    "fed",
+    "federal",
+    "reserve",
+    "winners"
+   ]
+  }
+ ]
+}
