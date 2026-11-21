@@ -1,0 +1,26 @@
+{
+ "at": "2026-11-21T20:15:24.610695+00:00",
+ "folder": "queue/2026-11-22-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "45024b5aedfb"
+ ],
+ "titles": [
+  "US President praises India’s economic growth & low interest rates"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "economic",
+    "growth",
+    "interest",
+    "low",
+    "praises",
+    "president",
+    "rates"
+   ]
+  }
+ ]
+}
