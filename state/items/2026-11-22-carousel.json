@@ -2,7 +2,7 @@
  "at": "2026-11-22T08:43:58.463136+00:00",
  "folder": "queue/2026-11-22-carousel",
  "type": "carousel",
- "status": "drafted",
+ "status": "published",
  "sigs": [
   "0b149b87ac21",
   "2e29486f5db4",
@@ -61,5 +61,7 @@
     "what"
    ]
   }
- ]
+ ],
+ "media_id": "18035016551910182",
+ "permalink": "https://www.instagram.com/p/DgCa5fwl2zr/"
 }
