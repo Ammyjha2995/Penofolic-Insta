@@ -1,0 +1,35 @@
+{
+ "at": "2026-11-22T20:29:11.131358+00:00",
+ "folder": "queue/2026-11-23-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "29c7342ee8a7"
+ ],
+ "titles": [
+  "Dalal Street Week Ahead: US GDP, FIIs mood, oil prices, PMI flash numbers among 10 key factors to watch"
+ ],
+ "topics": [
+  {
+   "cat": "Growth",
+   "words": [
+    "ahead",
+    "among",
+    "dalal",
+    "factors",
+    "fiis",
+    "flash",
+    "gdp",
+    "key",
+    "mood",
+    "numbers",
+    "oil",
+    "pmi",
+    "prices",
+    "street",
+    "watch",
+    "week"
+   ]
+  }
+ ]
+}
