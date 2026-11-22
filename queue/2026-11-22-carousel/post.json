@@ -1,0 +1,63 @@
+{
+ "type": "carousel",
+ "date": "22 November 2026",
+ "caption": "Government, corporate spending to sustain global growth in 2027 as inflation eases: JPMorgan\n\nThe Daily Brief · 22 November 2026\n\n1. Government, corporate spending to sustain global growth in 2027 as inflation eases: JPMorgan (Economic Times)\n2. GST Network adds metro rail as fifth mode of transport in e-way bill system (BusinessLine, Economic Times)\n3. Employers are being asked to give interview feedback - here's what applicants want (BBC Business)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #GDP #EconomicGrowth #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "Government, corporate spending to sustain global growth in 2027 as inflation eases: JPMorgan",
+   "hook": "Government, corporate spending to sustain global growth in 2027 as inflation eases: JPMorgan",
+   "points": [
+    "Global economic growth is projected to be resilient in 2027 due to continued government investment and corporate spending."
+   ],
+   "why": "",
+   "category": "Growth",
+   "region": "india",
+   "sources": [
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/indicators/government-corporate-spending-to-sustain-global-growth-in-2027-as-inflation-eases-jpmorgan/articleshow/136068673.cms",
+   "score": 20.83,
+   "trending": false
+  },
+  {
+   "title": "GST Network adds metro rail as fifth mode of transport in e-way bill system",
+   "hook": "GST Network adds metro rail as fifth mode of transport in e-way bill system",
+   "points": [
+    "GSTN has introduced metro rail as a new mode of transport in the e-way bill system."
+   ],
+   "why": "",
+   "category": "Fiscal",
+   "region": "india",
+   "sources": [
+    "BusinessLine",
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/policy/gst-network-adds-metro-rail-as-fifth-mode-of-transport-in-e-way-bill-system/articleshow/136050476.cms",
+   "score": 11.46,
+   "trending": false
+  },
+  {
+   "title": "Employers are being asked to give interview feedback - here's what applicants want",
+   "hook": "Employers are being asked to give interview feedback - here's what applicants want",
+   "points": [
+    "People say they often hear nothing back after applying for jobs."
+   ],
+   "why": "",
+   "category": "Jobs",
+   "region": "world",
+   "sources": [
+    "BBC Business"
+   ],
+   "link": "https://www.bbc.co.uk/news/articles/cm2d94le23xyo?at_medium=RSS&at_campaign=rss",
+   "score": 3.82,
+   "trending": false
+  }
+ ]
+}

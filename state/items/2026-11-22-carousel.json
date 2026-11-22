@@ -1,0 +1,65 @@
+{
+ "at": "2026-11-22T08:43:58.463136+00:00",
+ "folder": "queue/2026-11-22-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "0b149b87ac21",
+  "2e29486f5db4",
+  "8fee7c5a380c",
+  "0f9f532cc305"
+ ],
+ "titles": [
+  "Government, corporate spending to sustain global growth in 2027 as inflation eases: JPMorgan",
+  "GST Network adds metro rail as fifth mode of transport in e-way bill system",
+  "Employers are being asked to give interview feedback - here's what applicants want"
+ ],
+ "topics": [
+  {
+   "cat": "Growth",
+   "words": [
+    "2027",
+    "corporate",
+    "eases",
+    "global",
+    "growth",
+    "inflation",
+    "jpmorgan",
+    "spending",
+    "sustain"
+   ]
+  },
+  {
+   "cat": "Fiscal",
+   "words": [
+    "added",
+    "adds",
+    "bill",
+    "fifth",
+    "gst",
+    "metro",
+    "mode",
+    "network",
+    "rail",
+    "system",
+    "transport",
+    "way"
+   ]
+  },
+  {
+   "cat": "Jobs",
+   "words": [
+    "applicants",
+    "asked",
+    "being",
+    "employers",
+    "feedback",
+    "give",
+    "here",
+    "interview",
+    "want",
+    "what"
+   ]
+  }
+ ]
+}
