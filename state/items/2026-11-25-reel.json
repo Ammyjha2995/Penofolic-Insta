@@ -1,0 +1,29 @@
+{
+ "at": "2026-11-24T23:14:44.937437+00:00",
+ "folder": "queue/2026-11-25-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "cef64c4bf682"
+ ],
+ "titles": [
+  "Gold rebound loses steam as Fed interest rate hike bets weigh"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "bets",
+    "fed",
+    "gold",
+    "hike",
+    "interest",
+    "loses",
+    "rate",
+    "rebound",
+    "steam",
+    "weigh"
+   ]
+  }
+ ]
+}
