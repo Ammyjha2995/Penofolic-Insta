@@ -1,0 +1,69 @@
+{
+ "at": "2026-11-24T11:34:17.963908+00:00",
+ "folder": "queue/2026-11-24-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "d1a352b9e568",
+  "6a9945b0ab34",
+  "6a9945b0ab34",
+  "372c37ba7329"
+ ],
+ "titles": [
+  "New CPI series to narrow gap between measured and perceived inflation: RBI Deputy Governor",
+  "India-EU free trade pact to open new opportunities for trade, investment: German state leader",
+  "A slash-and-burn budget update could push Australia into a recession. Jim Chalmers has a fine line to tread | Patrick Commins"
+ ],
+ "topics": [
+  {
+   "cat": "Inflation",
+   "words": [
+    "between",
+    "cpi",
+    "deputy",
+    "gap",
+    "governor",
+    "inflation",
+    "measured",
+    "narrow",
+    "perceived",
+    "rbi",
+    "series"
+   ]
+  },
+  {
+   "cat": "Investment",
+   "words": [
+    "free",
+    "german",
+    "investment",
+    "leader",
+    "open",
+    "opportunities",
+    "pact",
+    "state",
+    "trade"
+   ]
+  },
+  {
+   "cat": "Growth",
+   "words": [
+    "australia",
+    "budget",
+    "burn",
+    "chalmers",
+    "commins",
+    "could",
+    "fine",
+    "jim",
+    "line",
+    "patrick",
+    "push",
+    "recession",
+    "slash",
+    "tread",
+    "update"
+   ]
+  }
+ ]
+}

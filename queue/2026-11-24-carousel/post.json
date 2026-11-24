@@ -1,0 +1,61 @@
+{
+ "type": "carousel",
+ "date": "24 November 2026",
+ "caption": "New CPI series to narrow gap between measured and perceived inflation: RBI Deputy Governor\n\nThe Daily Brief · 24 November 2026\n\n1. New CPI series to narrow gap between measured and perceived inflation: RBI Deputy Governor (BusinessLine)\n2. India-EU free trade pact to open new opportunities for trade, investment: German state leader (BusinessLine, Economic Times)\n3. A slash-and-burn budget update could push Australia into a recession. Jim Chalmers has a fine line to tread… (The Guardian)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #Inflation #CPI #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "New CPI series to narrow gap between measured and perceived inflation: RBI Deputy Governor",
+   "hook": "New CPI series to narrow gap between measured and perceived inflation: RBI Deputy Governor",
+   "points": [
+    "The updated inflation framework includes changes in consumption weights, housing coverage and price collection to capture evolving household…"
+   ],
+   "why": "",
+   "category": "Inflation",
+   "region": "india",
+   "sources": [
+    "BusinessLine"
+   ],
+   "link": "https://www.thehindubusinessline.com/economy/new-cpi-series-to-narrow-gap-between-measured-and-perceived-inflation-rbi-deputy-governor/article71733936.ece",
+   "score": 18.29,
+   "trending": false
+  },
+  {
+   "title": "India-EU free trade pact to open new opportunities for trade, investment: German state leader",
+   "hook": "India-EU free trade pact to open new opportunities for trade, investment: German state leader",
+   "points": [
+    "India and the European Union concluded negotiations on a Free Trade Agreement that is set to be finalized soon."
+   ],
+   "why": "",
+   "category": "Investment",
+   "region": "india",
+   "sources": [
+    "BusinessLine",
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/india-eu-free-trade-pact-to-open-new-opportunities-for-trade-investment-german-state-leader/articleshow/136121903.cms",
+   "score": 16.68,
+   "trending": false
+  },
+  {
+   "title": "A slash-and-burn budget update could push Australia into a recession. Jim Chalmers has a fine line to tread | Patrick Commins",
+   "hook": "A slash-and-burn budget update could push Australia into a recession. Jim Chalmers has a fine line to tread…",
+   "points": [],
+   "why": "",
+   "category": "Growth",
+   "region": "world",
+   "sources": [
+    "The Guardian"
+   ],
+   "link": "https://www.theguardian.com/business/2026/nov/24/mid-year-budget-cuts-recession-inflation-unemployment-australia-jim-chalmers",
+   "score": 12.75,
+   "trending": false
+  }
+ ]
+}
