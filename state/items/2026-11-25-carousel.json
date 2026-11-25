@@ -1,0 +1,60 @@
+{
+ "at": "2026-11-25T10:23:41.262290+00:00",
+ "folder": "queue/2026-11-25-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "3ceef2f0aa3e",
+  "2e47eda150ce",
+  "2e47eda150ce",
+  "fabd49aebe6e"
+ ],
+ "titles": [
+  "RBI hunts for possible '$2 million loophole' in importers' forex transactions",
+  "India, Canada 'very close' to conclude trade pact negotiations: Official",
+  "‘Ready for any storm’: UAE minister optimistic on economy as IMF lifts forecast"
+ ],
+ "topics": [
+  {
+   "cat": "Markets",
+   "words": [
+    "forex",
+    "hunts",
+    "importers",
+    "loophole",
+    "million",
+    "possible",
+    "rbi",
+    "transactions"
+   ]
+  },
+  {
+   "cat": "Trade",
+   "words": [
+    "canada",
+    "close",
+    "conclude",
+    "negotiations",
+    "official",
+    "pact",
+    "trade",
+    "very"
+   ]
+  },
+  {
+   "cat": "Growth",
+   "words": [
+    "any",
+    "economy",
+    "forecast",
+    "imf",
+    "lifts",
+    "minister",
+    "optimistic",
+    "ready",
+    "storm",
+    "uae"
+   ]
+  }
+ ]
+}

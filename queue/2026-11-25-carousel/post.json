@@ -1,0 +1,63 @@
+{
+ "type": "carousel",
+ "date": "25 November 2026",
+ "caption": "$2 mn: RBI hunts for possible '$2 million loophole' in importers' forex transactions\n\nThe Daily Brief · 25 November 2026\n\n1. RBI hunts for possible '$2 million loophole' in importers' forex transactions (Economic Times)\n2. India, Canada 'very close' to conclude trade pact negotiations: Official (BusinessLine, Economic Times)\n3. ‘Ready for any storm’: UAE minister optimistic on economy as IMF lifts forecast (CNBC)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #Rupee #Markets #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "RBI hunts for possible '$2 million loophole' in importers' forex transactions",
+   "hook": "RBI hunts for possible '$2 million loophole' in importers' forex transactions",
+   "points": [
+    "The Reserve Bank of India (RBI) has stepped up scrutiny of importers' forex transactions amid concerns that companies may be splitting deals below…"
+   ],
+   "why": "",
+   "category": "Markets",
+   "region": "india",
+   "sources": [
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/rbi-hunts-for-possible-2-million-loophole-in-importers-forex-transactions-reserve-bank-of-india-importers-foreign-exchange-deals-split-for-benefits-scams/articleshow/136156504.cms",
+   "score": 13.99,
+   "trending": false
+  },
+  {
+   "title": "India, Canada 'very close' to conclude trade pact negotiations: Official",
+   "hook": "India, Canada 'very close' to conclude trade pact negotiations: Official",
+   "points": [
+    "Negotiators from India and Canada are engaging daily to finalize the Comprehensive Economic Partnership Agreement negotiations."
+   ],
+   "why": "",
+   "category": "Trade",
+   "region": "india",
+   "sources": [
+    "BusinessLine",
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/foreign-trade/india-canada-very-close-to-conclude-trade-pact-negotiations-official/articleshow/136123468.cms",
+   "score": 13.23,
+   "trending": false
+  },
+  {
+   "title": "‘Ready for any storm’: UAE minister optimistic on economy as IMF lifts forecast",
+   "hook": "‘Ready for any storm’: UAE minister optimistic on economy as IMF lifts forecast",
+   "points": [
+    "The UAE is optimistic about achieving 7%-8% economic growth next year, banking on a \"different\" economic model."
+   ],
+   "why": "",
+   "category": "Growth",
+   "region": "world",
+   "sources": [
+    "CNBC"
+   ],
+   "link": "https://www.cnbc.com/2026/11/25/uae-iran-war-economy-oil.html",
+   "score": 8.48,
+   "trending": false
+  }
+ ]
+}
