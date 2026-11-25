@@ -1,0 +1,30 @@
+{
+ "at": "2026-11-25T22:42:39.339435+00:00",
+ "folder": "queue/2026-11-26-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "a68d757a1b2d"
+ ],
+ "titles": [
+  "Fed’s preferred inflation gauge accelerated to 3.8% in October, raising the 2027 stakes for the central bank"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "2027",
+    "accelerated",
+    "bank",
+    "central",
+    "fed",
+    "gauge",
+    "inflation",
+    "october",
+    "preferred",
+    "raising",
+    "stakes"
+   ]
+  }
+ ]
+}
