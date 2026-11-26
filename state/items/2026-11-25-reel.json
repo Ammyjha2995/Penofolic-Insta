@@ -2,7 +2,7 @@
  "at": "2026-11-24T23:14:44.937437+00:00",
  "folder": "queue/2026-11-25-reel",
  "type": "reel",
- "status": "drafted",
+ "status": "published",
  "sigs": [
   "cef64c4bf682"
  ],
@@ -25,5 +25,7 @@
     "weigh"
    ]
   }
- ]
+ ],
+ "media_id": "18033180620880638",
+ "permalink": "https://www.instagram.com/reel/DgMcC1esF_S/"
 }
