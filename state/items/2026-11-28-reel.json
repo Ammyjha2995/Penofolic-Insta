@@ -1,0 +1,28 @@
+{
+ "at": "2026-11-27T22:18:40.103024+00:00",
+ "folder": "queue/2026-11-28-reel",
+ "type": "reel",
+ "status": "drafted",
+ "sigs": [
+  "7c191f008bae"
+ ],
+ "titles": [
+  "RBI lowers minimum daily CRR maintenance requirement from 99% to 90%"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "90%",
+    "99%",
+    "crr",
+    "daily",
+    "lowers",
+    "maintenance",
+    "minimum",
+    "rbi",
+    "requirement"
+   ]
+  }
+ ]
+}
