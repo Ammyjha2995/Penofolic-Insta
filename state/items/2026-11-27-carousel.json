@@ -1,0 +1,58 @@
+{
+ "at": "2026-11-27T10:05:22.963969+00:00",
+ "folder": "queue/2026-11-27-carousel",
+ "type": "carousel",
+ "status": "drafted",
+ "sigs": [
+  "bcb4d08d7716",
+  "e3f99bb6f26c",
+  "433e6d09c4ee"
+ ],
+ "titles": [
+  "Money Market Operations as on November 26, 2026",
+  "US tariffs: India gets an edge over China, Vietnam, Bangladesh—but what must New Delhi do to secure it?",
+  "China’s factories are growing profits again, but the AI boom is picking the winners"
+ ],
+ "topics": [
+  {
+   "cat": "Monetary policy",
+   "words": [
+    "2026",
+    "market",
+    "money",
+    "november",
+    "operations"
+   ]
+  },
+  {
+   "cat": "Trade",
+   "words": [
+    "bangladesh",
+    "but",
+    "china",
+    "delhi",
+    "edge",
+    "gets",
+    "must",
+    "secure",
+    "tariffs",
+    "vietnam",
+    "what"
+   ]
+  },
+  {
+   "cat": "Growth",
+   "words": [
+    "again",
+    "boom",
+    "but",
+    "china",
+    "factories",
+    "growing",
+    "picking",
+    "profits",
+    "winners"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+{
+ "type": "carousel",
+ "date": "27 November 2026",
+ "caption": "Money Market Operations as on November 26, 2026\n\nThe Daily Brief · 27 November 2026\n\n1. Money Market Operations as on November 26, 2026 (RBI)\n2. US tariffs: India gets an edge over China, Vietnam, Bangladesh—but what must New Delhi do to secure it? (Mint)\n3. China’s factories are growing profits again, but the AI boom is picking the winners (CNBC)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #RBI #MonetaryPolicy #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "Money Market Operations as on November 26, 2026",
+   "hook": "Money Market Operations as on November 26, 2026",
+   "points": [
+    "(Amount in ₹ crore, Rate in Per cent) MONEY MARKETS @ --> Money Markets @ Volume (One Leg) Weighted Average Rate Range A."
+   ],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "india",
+   "sources": [
+    "RBI"
+   ],
+   "link": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64052",
+   "score": 13.0,
+   "trending": true
+  },
+  {
+   "title": "US tariffs: India gets an edge over China, Vietnam, Bangladesh—but what must New Delhi do to secure it?",
+   "hook": "US tariffs: India gets an edge over China, Vietnam, Bangladesh—but what must New Delhi do to secure it?",
+   "points": [
+    "The US has proposed a 17% tariff on Indian exports if New Delhi reaches a trade deal with Washington, potentially giving India an edge over Asian…"
+   ],
+   "why": "",
+   "category": "Trade",
+   "region": "india",
+   "sources": [
+    "Mint"
+   ],
+   "link": "https://www.livemint.com/economy/us-tariffs-india-gets-an-edge-over-china-vietnam-bangladesh-but-what-must-new-delhi-do-to-secure-it-11795754423053.html",
+   "score": 12.65,
+   "trending": false
+  },
+  {
+   "title": "China’s factories are growing profits again, but the AI boom is picking the winners",
+   "hook": "China’s factories are growing profits again, but the AI boom is picking the winners",
+   "points": [
+    "China's economy has been running at two speeds, with AI-related manufacturing and exports powering growth while consumption, real estate investment…"
+   ],
+   "why": "",
+   "category": "Growth",
+   "region": "world",
+   "sources": [
+    "CNBC"
+   ],
+   "link": "https://www.cnbc.com/2026/11/27/china-industrial-profits-october.html",
+   "score": 14.14,
+   "trending": false
+  }
+ ]
+}
