@@ -1,0 +1,61 @@
+{
+ "type": "carousel",
+ "date": "28 November 2026",
+ "caption": "4.3%: India's FY28 fiscal deficit projected to stay unchanged at 4.3% of GDP: Deutsche Bank\n\nThe Daily Brief · 28 November 2026\n\n1. India's FY28 fiscal deficit projected to stay unchanged at 4.3% of GDP: Deutsche Bank (BusinessLine, Economic Times)\n2. India inflation may rise in coming months on weather, supply risks: Govt report (Economic Times)\n3. Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates) (ECB)\n\nSwipe for the numbers and why each one matters.\nWhich story affects you most? Comment 1, 2 or 3 👇\n\nSummaries by Penofolic from public reports. Not investment advice.\n\n#Penofolic #Inflation #CPI #IndianEconomy #UPSCEconomy",
+ "slides": [
+  "slide-01.jpg",
+  "slide-02.jpg",
+  "slide-03.jpg",
+  "slide-04.jpg",
+  "slide-05.jpg"
+ ],
+ "stories": [
+  {
+   "title": "India's FY28 fiscal deficit projected to stay unchanged at 4.3% of GDP: Deutsche Bank",
+   "hook": "India's FY28 fiscal deficit projected to stay unchanged at 4.3% of GDP: Deutsche Bank",
+   "points": [
+    "India's fiscal deficit for the financial year 2028 is expected to stay at 4.3 percent of GDP."
+   ],
+   "why": "",
+   "category": "Inflation",
+   "region": "india",
+   "sources": [
+    "BusinessLine",
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/indicators/indias-fy28-fiscal-deficit-projected-to-stay-unchanged-at-4-3-of-gdp-deutsche-bank/articleshow/136238634.cms",
+   "score": 30.75,
+   "trending": false
+  },
+  {
+   "title": "India inflation may rise in coming months on weather, supply risks: Govt report",
+   "hook": "India inflation may rise in coming months on weather, supply risks: Govt report",
+   "points": [
+    "India's upcoming festive and wedding seasons could lead to increased inflation driven by food and non-food costs."
+   ],
+   "why": "",
+   "category": "Inflation",
+   "region": "india",
+   "sources": [
+    "Economic Times"
+   ],
+   "link": "https://economictimes.indiatimes.com/news/economy/indicators/india-inflation-may-rise-in-coming-months-on-weather-supply-risks-govt-report/articleshow/136242640.cms",
+   "score": 15.46,
+   "trending": false
+  },
+  {
+   "title": "Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates)",
+   "hook": "Decisions taken by the Governing Council of the ECB (in addition to decisions setting interest rates)",
+   "points": [],
+   "why": "",
+   "category": "Monetary policy",
+   "region": "world",
+   "sources": [
+    "ECB"
+   ],
+   "link": "https://www.ecb.europa.eu//press/govcdec/otherdec/2026/html/ecb.gc261127~13ecadc0f2.en.html",
+   "score": 11.31,
+   "trending": false
+  }
+ ]
+}
